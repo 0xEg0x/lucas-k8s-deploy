@@ -26,8 +26,8 @@ A aplicação está dividida em dois namespaces principais para isolamento de re
 ### 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/pedrofilhojp/kube-students-projects.git
-cd kube-students-projects
+git clone https://github.com/0xEg0x/lucas-k8s-deploy.git
+cd lucas-k8s-deploy.git
 ```
 
 ### 2. Aplicar as configurações no Kubernetes
