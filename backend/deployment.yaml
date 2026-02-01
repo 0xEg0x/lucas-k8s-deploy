@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: app  # Corrigido: era kind-lucas-k8s
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: l1ckyn/backend-app:latest
+          ports:
+            - containerPort: 5000
+          env:
+            - name: DB_HOST
+              value: postgres-service.database.svc.cluster.local # FQDN completo
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_USER
+              value: postgres
+            - name: DB_PASSWORD
+              value: senha123
+            - name: DB_NAME
+              value: mensagens_db # Corrigido: com underline como no seu Secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service # Corrigido: para bater com o Ingress
+  namespace: app
+spec:
+  selector:
+    app: backend
+  ports:
+    - port: 5000
+      targetPort: 5000
